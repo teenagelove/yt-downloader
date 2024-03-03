@@ -8,7 +8,6 @@ import (
 	"yt-donwloader/lib/converter"
 	"yt-donwloader/lib/downloader"
 	"yt-donwloader/lib/e"
-	"yt-donwloader/lib/testaudio"
 )
 
 const (
@@ -21,11 +20,11 @@ func (p *Processor) doCmd(ctx context.Context, text string, chatID int, username
 
 	log.Printf("got new command '%s' from '%s", text, username)
 	if isYoutube(text) {
-		//fileName := p.saveVideo(ctx, chatID, text)
-		//p.saveVideo(ctx, chatID, text)
-		testAudio.Test()
+		fileName, _ := p.saveVideo(ctx, chatID, text)
+		audioName, _ := p.convertVideo(ctx, chatID, fileName)
+		return p.sendAudio(ctx, chatID, audioName)
+		//testAudio.Test()
 		//return p.convertVideo(ctx, chatID, fileName)
-		//return p.sendAudio(ctx, chatID)
 	}
 
 	switch text {
@@ -38,18 +37,18 @@ func (p *Processor) doCmd(ctx context.Context, text string, chatID int, username
 	}
 }
 
-func (p *Processor) saveVideo(ctx context.Context, chatID int, link string) (fileName string) {
-	//defer func() { err = e.WrapIfErr("can't do command: save page", err) }()
-	fileName = downloader.Donwload(link)
+func (p *Processor) saveVideo(ctx context.Context, chatID int, link string) (fileName string, err error) {
+	defer func() { err = e.WrapIfErr("can't do command: save video", err) }()
+	fileName, err = downloader.Donwload(link)
 
-	return fileName
+	return fileName, err
 }
 
-func (p *Processor) convertVideo(ctx context.Context, chatID int, fileName string) (err error) {
-	defer func() { err = e.WrapIfErr("can't do command: save page", err) }()
-	converter.Converter(fileName)
+func (p *Processor) convertVideo(ctx context.Context, chatID int, fileName string) (outputFile string, err error) {
+	defer func() { err = e.WrapIfErr("can't do command: convert video", err) }()
+	outputFile, err = converter.Converter(fileName)
 
-	return nil
+	return outputFile, err
 }
 
 func (p *Processor) sendHelp(ctx context.Context, chatID int) error {
@@ -60,10 +59,8 @@ func (p *Processor) sendHello(ctx context.Context, chatID int) error {
 	return p.tg.SendMessage(ctx, chatID, msgHello)
 }
 
-func (p *Processor) sendAudio(ctx context.Context, chatID int) error {
-	//audio, _ := os.Open("./storage/LSD - Audio (Official Video) ft. Sia, Diplo, Labrinth.mp4.mp3")
-	return p.tg.SendAudio(ctx, chatID, "LSD.mp3")
-	//return p.tg.SendMessage(ctx, chatID, msgVideo)
+func (p *Processor) sendAudio(ctx context.Context, chatID int, audioPath string) error {
+	return p.tg.SendAudio(ctx, chatID, audioPath)
 }
 
 func isYoutube(text string) bool {

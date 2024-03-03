@@ -6,7 +6,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
-	"log"
 	"mime/multipart"
 	"net/http"
 	"net/url"
@@ -48,7 +47,7 @@ func (c *Client) Updates(ctx context.Context, offset int, limit int) (updates []
 	q.Add("offset", strconv.Itoa(offset))
 	q.Add("limit", strconv.Itoa(limit))
 
-	data, err := c.doRequest(ctx, getUpdatesMethod, q)
+	data, err := c.doRequest(ctx, getUpdatesMethod, q, nil, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +66,7 @@ func (c *Client) SendMessage(ctx context.Context, chatID int, text string) error
 	q.Add("chat_id", strconv.Itoa(chatID))
 	q.Add("text", text)
 
-	_, err := c.doRequest(ctx, sendMessageMethod, q)
+	_, err := c.doRequest(ctx, sendMessageMethod, q, nil, nil)
 	if err != nil {
 		return e.Wrap("can't send message", err)
 	}
@@ -77,6 +76,8 @@ func (c *Client) SendMessage(ctx context.Context, chatID int, text string) error
 
 func (c *Client) SendAudio(ctx context.Context, chatID int, audioFilePath string) error {
 	q := url.Values{}
+	q.Add("chat_id", strconv.Itoa(chatID))
+	q.Add("audio", audioFilePath)
 
 	audioFile, err := os.Open(audioFilePath)
 	if err != nil {
@@ -99,19 +100,20 @@ func (c *Client) SendAudio(ctx context.Context, chatID int, audioFilePath string
 		fmt.Println("Error copying audio content:", err)
 		return err
 	}
-	q.Add("chat_id", strconv.Itoa(chatID))
-	q.Add("audio", audioFilePath)
 
-	body, err := c.doRequest(ctx, sendAudioMethod, q)
+	header := make(map[string]string)
+	header["key"] = "key"
+	header["value"] = writer.FormDataContentType()
+
+	_, err = c.doRequest(ctx, sendAudioMethod, q, &requestBody, header)
 	if err != nil {
 		return e.Wrap("can't send audio", err)
 	}
 
-	log.Println(string(body))
 	return nil
 }
 
-func (c *Client) doRequest(ctx context.Context, method string, query url.Values) (data []byte, err error) {
+func (c *Client) doRequest(ctx context.Context, method string, query url.Values, requestBody io.Reader, header map[string]string) (data []byte, err error) {
 	defer func() { err = e.WrapIfErr("can't do request", err) }()
 
 	u := url.URL{
@@ -120,13 +122,16 @@ func (c *Client) doRequest(ctx context.Context, method string, query url.Values)
 		Path:   path.Join(c.basePath, method),
 	}
 
-	req, err := http.NewRequestWithContext(ctx, http.MethodGet, u.String(), nil)
+	req, err := http.NewRequestWithContext(ctx, http.MethodGet, u.String(), requestBody)
 	if err != nil {
 		return nil, err
 	}
 
 	req.URL.RawQuery = query.Encode()
-	//req.Header.Set("Content-Type", writer.FormDataContentType())
+
+	if header != nil {
+		req.Header.Set(header["key"], header["value"])
+	}
 
 	resp, err := c.client.Do(req)
 	if err != nil {
@@ -134,11 +139,17 @@ func (c *Client) doRequest(ctx context.Context, method string, query url.Values)
 	}
 	defer func() { _ = resp.Body.Close() }()
 
+	//var result map[string]interface{}
+	//err = json.NewDecoder(resp.Body).Decode(&result)
+	//if err != nil {
+	//	log.Println("Error decoding response body:", err)
+	//	return
+	//}
+
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
 		return nil, err
 	}
 
 	return body, nil
-
 }
