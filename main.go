@@ -14,7 +14,7 @@ const (
 
 func main() {
 	//cfg := config.MustLoad()
-	//test12.TestAudio()
+	//testAudio.Test()
 	eventsProcessor := telegram.New(
 		//tgClient.New(tgBotHost, cfg.TgBotToken),
 		tgClient.New(tgBotHost, "6522972257:AAHqiMteOFyXw7xWuXI9kNZW2FzBQStGV-g"),

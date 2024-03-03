@@ -7,7 +7,7 @@ import (
 	"github.com/kkdai/youtube/v2"
 )
 
-func Donwload(link string) string {
+func Donwload(link string) (outputFile string, err error) {
 	videoID := link
 	client := youtube.Client{}
 
@@ -35,5 +35,5 @@ func Donwload(link string) string {
 		panic(err)
 	}
 
-	return fileName
+	return fileName, err
 }
