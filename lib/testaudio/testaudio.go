@@ -70,6 +70,7 @@ func sendAudio(token, chatID, audioFilePath string) {
 
 	// Send the request
 	client := &http.Client{}
+
 	resp, err := client.Do(req)
 	if err != nil {
 		fmt.Println("Error sending request:", err)
