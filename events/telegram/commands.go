@@ -20,9 +20,10 @@ func (p *Processor) doCmd(ctx context.Context, text string, chatID int, username
 
 	log.Printf("got new command '%s' from '%s", text, username)
 	if isYoutube(text) {
-		fileName, _ := p.saveVideo(ctx, chatID, text)
-		audioName, _ := p.convertVideo(ctx, chatID, fileName)
+		fileName, _ := p.saveVideo(text)
+		audioName, _ := p.convertVideo(fileName)
 		return p.sendAudio(ctx, chatID, audioName)
+		//return p.sendAudio(ctx, chatID, "./storage/ПОШЛАЯ МОЛЛИ, HOFMANNITA – #HABIBATI.mp4")
 		//testAudio.Test()
 		//return p.convertVideo(ctx, chatID, fileName)
 	}
@@ -37,14 +38,14 @@ func (p *Processor) doCmd(ctx context.Context, text string, chatID int, username
 	}
 }
 
-func (p *Processor) saveVideo(ctx context.Context, chatID int, link string) (fileName string, err error) {
+func (p *Processor) saveVideo(link string) (fileName string, err error) {
 	defer func() { err = e.WrapIfErr("can't do command: save video", err) }()
 	fileName, err = downloader.Donwload(link)
 
 	return fileName, err
 }
 
-func (p *Processor) convertVideo(ctx context.Context, chatID int, fileName string) (outputFile string, err error) {
+func (p *Processor) convertVideo(fileName string) (outputFile string, err error) {
 	defer func() { err = e.WrapIfErr("can't do command: convert video", err) }()
 	outputFile, err = converter.Converter(fileName)
 
