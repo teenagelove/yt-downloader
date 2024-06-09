@@ -1,5 +1,3 @@
-# Read Adviser Bot
+# YouTube Downloader Bot
 
-**Read Adviser Bot** - is a bot for Telegram that can save links sent by users and can send you random from them.
-
-It can be useful for people who often save many links, but always forget about them.
+**YouTube Downloader Bot** - is a bot for Telegram that can save audio from YouTube video.

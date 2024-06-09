@@ -7,7 +7,7 @@ import (
 
 func Converter(fileName string) (outputFile string, err error) {
 	outputFile = fileName + ".mp3"
-	err = ffmpeg.Input(fileName).Output(outputFile).
+	err = ffmpeg.Input(fileName + ".mp4").Output(outputFile).
 		OverWriteOutput().ErrorToStdOut().Run()
 	if err != nil {
 		log.Println(err)

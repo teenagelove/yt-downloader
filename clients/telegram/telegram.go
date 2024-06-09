@@ -77,7 +77,6 @@ func (c *Client) SendMessage(ctx context.Context, chatID int, text string) error
 func (c *Client) SendAudio(ctx context.Context, chatID int, audioFilePath string) error {
 	q := url.Values{}
 	q.Add("chat_id", strconv.Itoa(chatID))
-	q.Add("audio", audioFilePath)
 
 	audioFile, err := os.Open(audioFilePath)
 	if err != nil {
@@ -101,8 +100,16 @@ func (c *Client) SendAudio(ctx context.Context, chatID int, audioFilePath string
 		return err
 	}
 
+	_ = writer.WriteField("chat_id", strconv.Itoa(chatID))
+
+	err = writer.Close()
+	if err != nil {
+		fmt.Println("Error closing multipart writer:", err)
+		return err
+	}
+
 	header := make(map[string]string)
-	header["key"] = "key"
+	header["key"] = "Content-Type"
 	header["value"] = writer.FormDataContentType()
 
 	_, err = c.doRequest(ctx, sendAudioMethod, q, &requestBody, header)
@@ -132,19 +139,12 @@ func (c *Client) doRequest(ctx context.Context, method string, query url.Values,
 	if header != nil {
 		req.Header.Set(header["key"], header["value"])
 	}
-
 	resp, err := c.client.Do(req)
+
 	if err != nil {
 		return nil, err
 	}
 	defer func() { _ = resp.Body.Close() }()
-
-	//var result map[string]interface{}
-	//err = json.NewDecoder(resp.Body).Decode(&result)
-	//if err != nil {
-	//	log.Println("Error decoding response body:", err)
-	//	return
-	//}
 
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {

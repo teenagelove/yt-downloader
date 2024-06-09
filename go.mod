@@ -7,14 +7,14 @@ toolchain go1.22.0
 require (
 	github.com/aws/aws-sdk-go v1.38.20 // indirect
 	github.com/bitly/go-simplejson v0.5.1 // indirect
-	github.com/dlclark/regexp2 v1.10.0 // indirect
-	github.com/dop251/goja v0.0.0-20231027120936-b396bb4c349d // indirect
+	github.com/dlclark/regexp2 v1.11.0 // indirect
+	github.com/dop251/goja v0.0.0-20240220182346-e401ed450204 // indirect
 	github.com/go-sourcemap/sourcemap v2.1.3+incompatible // indirect
 	github.com/go-stack/stack v1.8.0 // indirect
 	github.com/golang/snappy v0.0.1 // indirect
-	github.com/google/pprof v0.0.0-20231101202521-4ca4178f5c7a // indirect
+	github.com/google/pprof v0.0.0-20240227163752-401108e1b7e7 // indirect
 	github.com/jmespath/go-jmespath v0.4.0 // indirect
-	github.com/kkdai/youtube/v2 v2.10.0 // indirect
+	github.com/kkdai/youtube/v2 v2.10.1 // indirect
 	github.com/klauspost/compress v1.13.6 // indirect
 	github.com/knadh/go-get-youtube v0.0.0-20191105144436-94a3fa9fdab3 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
