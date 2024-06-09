@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/url"
 	"strings"
+	"yt-donwloader/lib/cleaner"
 	"yt-donwloader/lib/converter"
 	"yt-donwloader/lib/downloader"
 	"yt-donwloader/lib/e"
@@ -19,13 +20,15 @@ func (p *Processor) doCmd(ctx context.Context, text string, chatID int, username
 	text = strings.TrimSpace(text)
 
 	log.Printf("got new command '%s' from '%s", text, username)
+
 	if isYoutube(text) {
+		err := p.sendWait(ctx, chatID)
+		if err != nil {
+			return err
+		}
 		fileName, _ := p.saveVideo(text)
 		audioName, _ := p.convertVideo(fileName)
 		return p.sendAudio(ctx, chatID, audioName)
-		//return p.sendAudio(ctx, chatID, "./storage/ПОШЛАЯ МОЛЛИ, HOFMANNITA – #HABIBATI.mp4")
-		//testAudio.Test()
-		//return p.convertVideo(ctx, chatID, fileName)
 	}
 
 	switch text {
@@ -40,7 +43,7 @@ func (p *Processor) doCmd(ctx context.Context, text string, chatID int, username
 
 func (p *Processor) saveVideo(link string) (fileName string, err error) {
 	defer func() { err = e.WrapIfErr("can't do command: save video", err) }()
-	fileName, err = downloader.Donwload(link)
+	fileName, err = downloader.Download(link)
 
 	return fileName, err
 }
@@ -60,8 +63,15 @@ func (p *Processor) sendHello(ctx context.Context, chatID int) error {
 	return p.tg.SendMessage(ctx, chatID, msgHello)
 }
 
+func (p *Processor) sendWait(ctx context.Context, chatID int) error {
+	return p.tg.SendMessage(ctx, chatID, msgWait)
+}
+
 func (p *Processor) sendAudio(ctx context.Context, chatID int, audioPath string) error {
-	return p.tg.SendAudio(ctx, chatID, audioPath)
+	//return p.tg.SendAudio(ctx, chatID, audioPath)
+	err := p.tg.SendAudio(ctx, chatID, audioPath)
+	cleaner.ClearDirectory()
+	return err
 }
 
 func isYoutube(text string) bool {
