@@ -26,8 +26,17 @@ func (p *Processor) doCmd(ctx context.Context, text string, chatID int, username
 		if err != nil {
 			return err
 		}
-		fileName, _ := p.saveVideo(text)
-		audioName, _ := p.convertVideo(fileName)
+
+		fileName, err := p.saveVideo(text)
+		if err != nil {
+			return p.tg.SendMessage(ctx, chatID, msgOops)
+		}
+
+		audioName, err := p.convertVideo(fileName)
+		if err != nil {
+			return p.tg.SendMessage(ctx, chatID, msgOops)
+		}
+
 		return p.sendAudio(ctx, chatID, audioName)
 	}
 
@@ -68,7 +77,6 @@ func (p *Processor) sendWait(ctx context.Context, chatID int) error {
 }
 
 func (p *Processor) sendAudio(ctx context.Context, chatID int, audioPath string) error {
-	//return p.tg.SendAudio(ctx, chatID, audioPath)
 	err := p.tg.SendAudio(ctx, chatID, audioPath)
 	cleaner.ClearDirectory()
 	return err
@@ -80,6 +88,5 @@ func isYoutube(text string) bool {
 
 func isURL(text string) bool {
 	u, err := url.Parse(text)
-
 	return err == nil && u.Host != ""
 }
