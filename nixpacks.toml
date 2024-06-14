@@ -11,10 +11,10 @@ commands = [
     "export PATH=$PATH:/usr/bin:/usr/local/bin:/bin:/bin/ffmpeg"
 ]
 
-[phases.build]
-commands = [
-    "ls -la",
-]
+#[phases.build]
+#commands = [
+#    "ls -la",
+#]
 
 #[phases.start]
 #command = "./app"
