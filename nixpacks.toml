@@ -14,6 +14,7 @@ commands = [
 [phases.build]
 commands = [
     "echo 'Building Go application'",
+    "apt-get update && apt-get install -y ffmpeg",
     "go build -o app main.go",
     "ls -la",
     "echo 'Checking ffmpeg installation'",
