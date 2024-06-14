@@ -15,4 +15,4 @@ commands = [
 ]
 
 [phases.start]
-command = "./out"
+command = "./app"
