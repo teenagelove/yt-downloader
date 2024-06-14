@@ -39,6 +39,16 @@ func sanitizeFileName(fileName string) string {
 }
 
 func Download(link string) (outputFile string, err error) {
+	// Проверяем наличие директории storage
+	storageDir := "./storage"
+	if _, err := os.Stat(storageDir); os.IsNotExist(err) {
+		err := os.MkdirAll(storageDir, os.ModePerm)
+		if err != nil {
+			log.Printf("Error creating storage directory: %v\n", err)
+			return "", err
+		}
+	}
+
 	videoID := link
 	client := youtube.Client{}
 
@@ -74,7 +84,7 @@ func Download(link string) (outputFile string, err error) {
 
 	// Создаем файл для сохранения видео
 	sanitizedTitle := sanitizeFileName(video.Title)
-	fileName := fmt.Sprintf("./storage/%s", sanitizedTitle)
+	fileName := fmt.Sprintf("%s/%s", storageDir, sanitizedTitle)
 	file, err := os.Create(fileName + ".mp4")
 	if err != nil {
 		// Логируем ошибку и возвращаем её
