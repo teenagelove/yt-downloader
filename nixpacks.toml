@@ -1,4 +1,4 @@
 [phases.setup]
 aptPkgs = ["ffmpeg"]
-[phases.build]
 commands = ["export PATH=$PATH:/usr/local/bin/ffmpeg"]
+#[phases.build]
