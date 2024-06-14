@@ -2,6 +2,7 @@ package telegram
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"net/url"
 	"strings"
@@ -21,11 +22,12 @@ func (p *Processor) doCmd(ctx context.Context, text string, chatID int, username
 
 	log.Printf("got new command '%s' from '%s", text, username)
 
-	execCommand, err := converter.ExecuteCommand("ffmpeg -version")
+	output, err := converter.ExecuteCommand("ffmpeg")
 	if err != nil {
-		return err
+		fmt.Println("Ошибка:", err)
+	} else {
+		fmt.Println("Результат:", output)
 	}
-	log.Printf(execCommand)
 
 	if isYoutube(text) {
 		err := p.sendWait(ctx, chatID)
