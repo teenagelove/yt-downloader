@@ -11,7 +11,11 @@ aptPkgs = ["ffmpeg"]
 commands = [
     "echo 'Building Go application'",
     "go build -o app main.go",
-    "echo 'ffmpeg installed at:' $(which ffmpeg)"
+    "ls -la",
+    "echo 'Checking ffmpeg installation'",
+    "which ffmpeg || echo 'ffmpeg not found'",
+    "ffmpeg -version || echo 'ffmpeg not available'",
+    "echo 'Current PATH:' $PATH"
 ]
 
 [phases.start]
