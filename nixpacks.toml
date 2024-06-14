@@ -16,5 +16,5 @@ commands = [
     "ls -la",
 ]
 
-[phases.start]
-command = "./app"
+#[phases.start]
+#command = "./app"
