@@ -7,7 +7,7 @@ import (
 
 func ExecuteCommand(command string) (string, error) {
 	// Разделяем команду и её аргументы для выполнения.
-	cmd := exec.Command("bash", "-c", command)
+	cmd := exec.Command(command)
 
 	// Создаем буфер для хранения стандартного вывода.
 	var out bytes.Buffer
