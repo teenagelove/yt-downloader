@@ -1,6 +1,18 @@
+#[phases.setup]
+#aptPkgs = ["ffmpeg"]
+#commands = ["export PATH=$PATH:/bin/ffmpeg",
+#"echo 'ffmpeg installed at:' $(which ffmpeg)"
+#]
+#[phases.build]
 [phases.setup]
 aptPkgs = ["ffmpeg"]
-commands = ["export PATH=$PATH:/bin/ffmpeg",
-"echo 'ffmpeg installed at:' $(which ffmpeg)"
+
+[phases.build]
+commands = [
+    "echo 'Building Go application'",
+    "go build -o app main.go",
+    "echo 'ffmpeg installed at:' $(which ffmpeg)"
 ]
-#[phases.build]
+
+[phases.start]
+command = "./app"
