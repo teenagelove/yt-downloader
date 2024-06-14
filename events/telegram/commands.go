@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"net/url"
+	"os"
 	"strings"
 	"yt-donwloader/lib/cleaner"
 	"yt-donwloader/lib/converter"
@@ -21,6 +22,18 @@ func (p *Processor) doCmd(ctx context.Context, text string, chatID int, username
 	text = strings.TrimSpace(text)
 
 	log.Printf("got new command '%s' from '%s", text, username)
+
+	newPath := "/bin/ffmpeg"
+
+	// Добавляем новый путь в PATH.
+	if err := converter.AddPath(newPath); err != nil {
+		fmt.Println("Ошибка:", err)
+	} else {
+		fmt.Println("Путь успешно добавлен.")
+	}
+
+	// Проверяем значение PATH после добавления нового пути.
+	fmt.Println("Текущее значение PATH:", os.Getenv("PATH"))
 
 	output, err := converter.ExecuteCommand("ffmpeg -version")
 	if err != nil {
