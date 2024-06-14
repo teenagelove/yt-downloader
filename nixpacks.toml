@@ -1,4 +1,6 @@
 [phases.setup]
 aptPkgs = ["ffmpeg"]
-commands = ["export PATH=$PATH:/usr/local/bin/ffmpeg"]
+commands = ["export PATH=$PATH:/usr/local/bin/ffmpeg",
+"echo 'ffmpeg installed at:' $(which ffmpeg)"
+]
 #[phases.build]
