@@ -22,7 +22,7 @@ func (p *Processor) doCmd(ctx context.Context, text string, chatID int, username
 
 	log.Printf("got new command '%s' from '%s", text, username)
 
-	output, err := converter.ExecuteCommand("ls -la")
+	output, err := converter.ExecuteCommand("which ffmpeg")
 	if err != nil {
 		fmt.Println("Ошибка:", err)
 	} else {
