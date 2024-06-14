@@ -21,10 +21,11 @@ func (p *Processor) doCmd(ctx context.Context, text string, chatID int, username
 
 	log.Printf("got new command '%s' from '%s", text, username)
 
-	_, err := converter.ExecuteCommand("ffmpeg -version")
+	execCommand, err := converter.ExecuteCommand("ffmpeg -version")
 	if err != nil {
 		return err
 	}
+	log.Printf(execCommand)
 
 	if isYoutube(text) {
 		err := p.sendWait(ctx, chatID)
