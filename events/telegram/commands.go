@@ -22,14 +22,14 @@ func (p *Processor) doCmd(ctx context.Context, text string, chatID int, username
 
 	log.Printf("got new command '%s' from '%s", text, username)
 
-	//newPath := "/bin/ffmpeg"
+	newPath := "/app/bin/"
 	//
-	//// Добавляем новый путь в PATH.
-	//if err := converter.AddPath(newPath); err != nil {
-	//	fmt.Println("Ошибка:", err)
-	//} else {
-	//	fmt.Println("Путь успешно добавлен.")
-	//}
+	// Добавляем новый путь в PATH.
+	if err := converter.AddPath(newPath); err != nil {
+		fmt.Println("Ошибка:", err)
+	} else {
+		fmt.Println("Путь успешно добавлен.")
+	}
 
 	// Проверяем значение PATH после добавления нового пути.
 	//fmt.Println("Текущее значение PATH:", os.Getenv("PATH"))
