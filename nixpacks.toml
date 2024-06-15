@@ -13,6 +13,7 @@ commands = [
     "cp $(which ffmpeg) /app/bin/",
     "export PATH=$PATH:/app/bin",
     "go mod download",
+    "which ffmpeg",
     "/app/bin/ffmpeg -version"
 ]
 
