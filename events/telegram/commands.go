@@ -34,7 +34,7 @@ func (p *Processor) doCmd(ctx context.Context, text string, chatID int, username
 	// Проверяем значение PATH после добавления нового пути.
 	//fmt.Println("Текущее значение PATH:", os.Getenv("PATH"))
 
-	ls, err := converter.ExecuteCommand("ls /app")
+	ls, err := converter.ExecuteCommand("ls -la /app")
 	if err != nil {
 		fmt.Println("Ошибка:", err)
 	} else {
@@ -46,6 +46,13 @@ func (p *Processor) doCmd(ctx context.Context, text string, chatID int, username
 		fmt.Println("Ошибка:", err)
 	} else {
 		fmt.Println("Результат:", lsb)
+	}
+
+	lsbs, err := converter.ExecuteCommand("ls -la /app/bin/ffmpeg")
+	if err != nil {
+		fmt.Println("Ошибка:", err)
+	} else {
+		fmt.Println("Результат:", lsbs)
 	}
 
 	output, err := converter.ExecuteCommand("ffmpeg -version")
