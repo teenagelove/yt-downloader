@@ -11,6 +11,7 @@ aptPkgs = ['...', 'ffmpeg']
 commands = [
     "mkdir -p /app/bin",
     "cp $(which ffmpeg) /app/bin/",
+    "export PATH=$PATH:/app/bin",
     "go mod download",
     "echo ffmpeg -version"
 ]
