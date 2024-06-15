@@ -12,7 +12,7 @@ commands = [
     "mkdir -p /app/bin",
     "cp $(which ffmpeg) /app/bin/",
     "go mod download",
-    "which ffmpeg"
+    "echo which ffmpeg"
 ]
 
 [phases.build]
