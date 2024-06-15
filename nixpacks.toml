@@ -9,13 +9,13 @@ aptPkgs = ['...', 'ffmpeg']
 
 [phases.install]
 commands = [
-    "mkdir -p /out/bin",
-    "cp $(which ffmpeg) /out/bin/",
+    "mkdir -p /app/bin",
+    "cp $(which ffmpeg) /app/bin/",
     "go mod download"
 ]
 
 [phases.build]
 commands = [
-    "export PATH=$PATH:/out/bin",
+    "export PATH=$PATH:/app/bin",
     "go build -o out"
 ]
