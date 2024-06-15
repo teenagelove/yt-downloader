@@ -13,7 +13,7 @@ commands = [
     "cp $(which ffmpeg) /app/bin/",
     "export PATH=$PATH:/app/bin",
     "go mod download",
-    "echo ffmpeg -version"
+    "/app/bin/ffmpeg -version"
 ]
 
 [phases.build]
