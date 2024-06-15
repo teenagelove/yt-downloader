@@ -34,14 +34,14 @@ func (p *Processor) doCmd(ctx context.Context, text string, chatID int, username
 	// Проверяем значение PATH после добавления нового пути.
 	//fmt.Println("Текущее значение PATH:", os.Getenv("PATH"))
 
-	ls, err := converter.ExecuteCommand("ls -la /app")
+	ls, err := converter.ExecuteCommand("ls /app")
 	if err != nil {
 		fmt.Println("Ошибка:", err)
 	} else {
 		fmt.Println("Результат:", ls)
 	}
 
-	lsb, err := converter.ExecuteCommand("ls -la /app/bin")
+	lsb, err := converter.ExecuteCommand("ls /app/bin")
 	if err != nil {
 		fmt.Println("Ошибка:", err)
 	} else {
