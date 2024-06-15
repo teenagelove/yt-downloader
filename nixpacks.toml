@@ -6,15 +6,16 @@
 #[phases.build]
 [phases.setup]
 aptPkgs = ['...', 'ffmpeg']
-#commands = [
-#    "echo 'Installing dependencies and setting environment'",
-#    "export PATH=$PATH:/usr/bin:/usr/local/bin:/bin:/bin/ffmpeg"
-#]
 
-#[phases.build]
-#commands = [
-#    "ls -la",
-#]
+[phases.install]
+commands = [
+    "mkdir -p /app/bin",
+    "cp $(which ffmpeg) /app/bin/",
+    "go mod download"
+]
 
-#[phases.start]
-#command = "./app"
+[phases.build]
+commands = [
+    "export PATH=$PATH:/app/bin",
+    "go build -o out"
+]
