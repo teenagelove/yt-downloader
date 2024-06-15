@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"log"
 	"net/url"
-	"os"
 	"strings"
 	"yt-donwloader/lib/cleaner"
 	"yt-donwloader/lib/converter"
@@ -33,14 +32,14 @@ func (p *Processor) doCmd(ctx context.Context, text string, chatID int, username
 	//}
 
 	// Проверяем значение PATH после добавления нового пути.
-	fmt.Println("Текущее значение PATH:", os.Getenv("PATH"))
+	//fmt.Println("Текущее значение PATH:", os.Getenv("PATH"))
 
-	apt, err := converter.ExecuteCommand("apt-get update && apt-get install -y ffmpeg")
-	if err != nil {
-		fmt.Println("Ошибка:", err)
-	} else {
-		fmt.Println("Результат:", apt)
-	}
+	//apt, err := converter.ExecuteCommand("apt-get update && apt-get install -y ffmpeg")
+	//if err != nil {
+	//	fmt.Println("Ошибка:", err)
+	//} else {
+	//	fmt.Println("Результат:", apt)
+	//}
 
 	output, err := converter.ExecuteCommand("ffmpeg -version")
 	if err != nil {
