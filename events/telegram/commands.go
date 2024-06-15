@@ -41,7 +41,7 @@ func (p *Processor) doCmd(ctx context.Context, text string, chatID int, username
 		fmt.Println("Результат:", ls)
 	}
 
-	lsb, err := converter.ExecuteCommand("ls /app/bin")
+	lsb, err := converter.ExecuteCommand("ls -la /app/bin")
 	if err != nil {
 		fmt.Println("Ошибка:", err)
 	} else {
