@@ -34,12 +34,19 @@ func (p *Processor) doCmd(ctx context.Context, text string, chatID int, username
 	// Проверяем значение PATH после добавления нового пути.
 	//fmt.Println("Текущее значение PATH:", os.Getenv("PATH"))
 
-	//apt, err := converter.ExecuteCommand("apt-get update && apt-get install -y ffmpeg")
-	//if err != nil {
-	//	fmt.Println("Ошибка:", err)
-	//} else {
-	//	fmt.Println("Результат:", apt)
-	//}
+	ls, err := converter.ExecuteCommand("ls /app")
+	if err != nil {
+		fmt.Println("Ошибка:", err)
+	} else {
+		fmt.Println("Результат:", ls)
+	}
+
+	lsb, err := converter.ExecuteCommand("ls /app/bin")
+	if err != nil {
+		fmt.Println("Ошибка:", err)
+	} else {
+		fmt.Println("Результат:", lsb)
+	}
 
 	output, err := converter.ExecuteCommand("ffmpeg -version")
 	if err != nil {

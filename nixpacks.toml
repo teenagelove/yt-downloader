@@ -17,5 +17,7 @@ commands = [
 [phases.build]
 commands = [
     "export PATH=$PATH:/app/bin",
-    "go build -o out"
+    "go build -o out",
+    "ls /app",
+    "ls /app/bin"
 ]
