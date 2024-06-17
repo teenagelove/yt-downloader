@@ -36,10 +36,11 @@ nixpkgs = "ffmpeg"
 PATH = "${PATH}:/usr/bin:/nix/store"
 
 # Этап запуска приложения
-[phases.start]
-# Команда запуска вашего приложения
-commands = [
-    "sudo apt-get update",
-    "apt-get install -y ffmpeg"
-]
-
+#[phases.start]
+## Команда запуска вашего приложения
+#commands = [
+#    "sudo apt-get update",
+#    "apt-get install -y ffmpeg"
+#]
+[start]
+cmd = ["...", "apt-get update && apt-get install -y ffmpeg"]
