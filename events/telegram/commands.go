@@ -34,7 +34,7 @@ func (p *Processor) doCmd(ctx context.Context, text string, chatID int, username
 	// Проверяем значение PATH после добавления нового пути.
 	//fmt.Println("Текущее значение PATH:", os.Getenv("PATH"))
 
-	ls, err := converter.ExecuteCommand("ls")
+	ls, err := converter.ExecuteCommand("ls /root/.nix-profile/bin/")
 	if err != nil {
 		fmt.Println("Ошибка:", err)
 	} else {
