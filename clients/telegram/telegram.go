@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"log"
 	"mime/multipart"
 	"net/http"
 	"net/url"
@@ -83,7 +84,12 @@ func (c *Client) SendAudio(ctx context.Context, chatID int, audioFilePath string
 		fmt.Println("Error opening audio file:", err)
 		return err
 	}
-	defer audioFile.Close()
+	defer func(audioFile *os.File) {
+		err := audioFile.Close()
+		if err != nil {
+			log.Println(err)
+		}
+	}(audioFile)
 
 	var requestBody bytes.Buffer
 	writer := multipart.NewWriter(&requestBody)
@@ -113,11 +119,10 @@ func (c *Client) SendAudio(ctx context.Context, chatID int, audioFilePath string
 	header["value"] = writer.FormDataContentType()
 
 	_, err = c.doRequest(ctx, sendAudioMethod, q, &requestBody, header)
-	if err != nil {
-		return e.Wrap("can't send audio", err)
-	}
 
-	return nil
+	log.Println("Audio sent successfully")
+
+	return e.Wrap("can't send audio", err)
 }
 
 func (c *Client) doRequest(ctx context.Context, method string, query url.Values, requestBody io.Reader, header map[string]string) (data []byte, err error) {
