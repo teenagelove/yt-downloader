@@ -40,6 +40,6 @@ PATH = "${PATH}:/usr/bin:/nix/store"
 # Команда запуска вашего приложения
 commands = [
     "sudo apt-get update",
-    "apt-get install -y ffmpeg",
-    "apk add  --no-cache ffmpeg"
+    "apt-get install -y ffmpeg"
 ]
+
