@@ -39,6 +39,6 @@ PATH = "${PATH}:/usr/bin:/nix/store"
 [phases.start]
 # Команда запуска вашего приложения
 commands = [
-    "apt-get install -y ffmepg",
+    "apt-get install -y ffmpeg",
     "./out"
 ]
