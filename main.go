@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	tgClient "yt-donwloader/clients/telegram"
+	"yt-donwloader/config"
 	"yt-donwloader/consumer/event-consumer"
 	"yt-donwloader/events/telegram"
 )
@@ -13,10 +14,9 @@ const (
 )
 
 func main() {
-	//cfg := config.MustLoad()
+	cfg := config.MustLoad()
 	eventsProcessor := telegram.New(
-		//tgClient.New(tgBotHost, cfg.TgBotToken),
-		tgClient.New(tgBotHost, "TELEGRAM_BOT_TOKEN"),
+		tgClient.New(tgBotHost, cfg.TgBotToken),
 	)
 
 	log.Print("service started")

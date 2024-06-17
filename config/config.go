@@ -5,7 +5,6 @@ import (
 	"log"
 )
 
-// token TELEGRAM_BOT_TOKEN
 type Config struct {
 	TgBotToken string
 }

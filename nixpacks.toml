@@ -1,2 +1,2 @@
 [start]
-cmd = "apt-get update && apt-get install -y --no-install-recommends ffmpeg  && ./out"
+cmd = "apt-get update && apt-get install -y --no-install-recommends ffmpeg  && ./out -${TELEGRAM_BOT_TOKEN}"
