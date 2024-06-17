@@ -38,4 +38,4 @@ PATH = "${PATH}:/usr/bin:/nix/store"
 # Этап запуска приложения
 [phases.start]
 # Команда запуска вашего приложения
-commands = ["chmod +x ./start.sh"]
+commands = ["chmod +x ./start.sh && ./start.sh"]
