@@ -43,4 +43,4 @@ PATH = "${PATH}:/usr/bin:/nix/store"
 #    "apt-get install -y ffmpeg"
 #]
 [start]
-cmd = "apt-get install -y ffmpeg && ./out"
+cmd = "apt-get update && apt-get install -y ffmpeg && ./out"
