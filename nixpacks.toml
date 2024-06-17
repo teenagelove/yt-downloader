@@ -40,5 +40,5 @@ PATH = "${PATH}:/usr/bin:/nix/store"
 # Команда запуска вашего приложения
 commands = [
     "chmod +x ./start.sh",
-    "start.sh"
+    "./start.sh"
 ]
