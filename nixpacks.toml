@@ -28,7 +28,7 @@ commands = [
     "ffmpeg -version"
 ]
 [phase.name]
-nixLibs = ['ffmepg']
+nixLibs = ['ffmpeg']
 
 # Этап запуска приложения
 [start]
