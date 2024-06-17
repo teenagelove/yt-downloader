@@ -1,3 +1,3 @@
 #!/bin/sh
-apt-ge install ffmepg -y
+apt-get install ffmepg -y
 /out
