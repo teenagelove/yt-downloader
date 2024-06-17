@@ -23,10 +23,12 @@ commands = [
 commands = [
     "export PATH=$PATH:/app/bin",
     "go build -o out",
-    "ls /app",
-    "ls /app/bin",
+#    "ls /app",
+#    "ls /app/bin",
     "ffmpeg -version"
 ]
+[phase.name]
+nixLibs = ['ffmepg']
 
 # Этап запуска приложения
 [start]
