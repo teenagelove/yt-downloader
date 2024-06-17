@@ -110,7 +110,7 @@ func (c *Client) SendAudio(ctx context.Context, chatID int, audioFilePath string
 
 	err = writer.Close()
 	if err != nil {
-		fmt.Println("Error closing multipart writer:", err)
+		log.Println("Error closing multipart writer:", err)
 		return err
 	}
 
@@ -120,7 +120,7 @@ func (c *Client) SendAudio(ctx context.Context, chatID int, audioFilePath string
 
 	_, err = c.doRequest(ctx, sendAudioMethod, q, &requestBody, header)
 
-	log.Println("Audio sent successfully")
+	log.Print("Audio sent successfully")
 
 	return e.Wrap("can't send audio", err)
 }
