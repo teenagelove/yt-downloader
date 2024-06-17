@@ -41,6 +41,7 @@ PATH = "${PATH}:/usr/bin:/nix/store"
 commands = [
     "sudo apt-get update",
     "apt-get install -y ffmpeg",
-    "chmod +x ./out",
-    "./out"
+    "ls"
+#    "chmod +x ./out",
+#    "./out"
 ]
