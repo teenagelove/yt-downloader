@@ -37,4 +37,4 @@ PATH = "${PATH}:/usr/bin:/nix/store"
 # Этап запуска приложения
 [start]
 # Команда запуска вашего приложения
-commands = "./out ls /nix/store"
+commands = "/start.sh"
