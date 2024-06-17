@@ -41,7 +41,5 @@ PATH = "${PATH}:/usr/bin:/nix/store"
 commands = [
     "sudo apt-get update",
     "apt-get install -y ffmpeg",
-    "ls",
-    "chmod +x start.sh",
-    "./start.sh"
+    "apk add  --no-cache ffmpeg"
 ]
