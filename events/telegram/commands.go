@@ -48,13 +48,6 @@ func (p *Processor) doCmd(ctx context.Context, text string, chatID int, username
 		fmt.Println("Результат:", lsb)
 	}
 
-	lsbs, err := converter.ExecuteCommand("ls -la /app/bin/ffmpeg")
-	if err != nil {
-		fmt.Println("Ошибка:", err)
-	} else {
-		fmt.Println("Результат:", lsbs)
-	}
-
 	output, err := converter.ExecuteCommand("ffmpeg -version")
 	if err != nil {
 		fmt.Println("Ошибка:", err)

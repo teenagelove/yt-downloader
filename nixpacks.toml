@@ -5,7 +5,8 @@
 #]
 #[phases.build]
 [phases.setup]
-aptPkgs = ['...', 'ffmpeg']
+# Указываем необходимые пакеты, включая FFmpeg
+nixPkgs = ["...", "ffmpeg"]
 
 [phases.install]
 commands = [
@@ -26,3 +27,8 @@ commands = [
     "ls /app/bin",
     "ffmpeg -version"
 ]
+
+# Этап запуска приложения
+[start]
+# Команда запуска вашего приложения
+commands = "./out"
