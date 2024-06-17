@@ -10,13 +10,13 @@ nixPkgs = ["...", "ffmpeg"]
 
 [phases.install]
 commands = [
-    "mkdir -p /app/bin",
-    "cp $(which ffmpeg) /app/bin/",
-    "cp /usr/lib/x86_64-linux-gnu/libavdevice.so.58 /app/bin/",
-    "export PATH=$PATH:/app/bin",
+#    "mkdir -p /app/bin",
+#    "cp $(which ffmpeg) /app/bin/",
+#    "cp /usr/lib/x86_64-linux-gnu/libavdevice.so.58 /app/bin/",
+#    "export PATH=$PATH:/app/bin",
     "go mod download",
     "which ffmpeg",
-    "/app/bin/ffmpeg -version"
+#    "/app/bin/ffmpeg -version"
 ]
 
 [phases.build]
