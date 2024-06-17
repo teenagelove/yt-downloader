@@ -1,46 +1,5 @@
-#[phases.setup]
-#aptPkgs = ["ffmpeg"]
-#commands = ["export PATH=$PATH:/bin/ffmpeg",
-#"echo 'ffmpeg installed at:' $(which ffmpeg)"
-#]
-#[phases.build]
 [phases.setup]
-# Указываем необходимые пакеты, включая FFmpeg
 nixPkgs = ["...", "ffmpeg"]
-nixLibs = ['ffmpeg']
 
-[phases.install]
-commands = [
-#    "mkdir -p /app/bin",
-#    "cp $(which ffmpeg) /app/bin/",
-#    "cp /usr/lib/x86_64-linux-gnu/libavdevice.so.58 /app/bin/",
-#    "export PATH=$PATH:/app/bin",
-    "go mod download",
-    "which ffmpeg",
-#    "/app/bin/ffmpeg -version"
-]
-
-[phases.build]
-commands = [
-    "export PATH=$PATH:/app/bin",
-    "go build -o out",
-#    "ls /app",
-#    "ls /app/bin",
-    "ffmpeg -version"
-]
-[packages.ffmpeg]
-description = "A complete, cross-platform solution to record, convert and stream audio and video."
-recommended = true
-nixpkgs = "ffmpeg"
-[environment]
-PATH = "${PATH}:/usr/bin:/nix/store"
-
-# Этап запуска приложения
-#[phases.start]
-## Команда запуска вашего приложения
-#commands = [
-#    "sudo apt-get update",
-#    "apt-get install -y ffmpeg"
-#]
-[start]
-cmd = "apt-get update && apt-get install -y ffmpeg && ./out"
+#[start]
+#cmd = "apt-get update && apt-get install -y ffmpeg && ./out"
