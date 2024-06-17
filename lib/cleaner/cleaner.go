@@ -1,21 +1,22 @@
 package cleaner
 
 import (
-	"io/ioutil"
 	"log"
 	"os"
+	"path/filepath"
 )
 
 func clearDirectory(dirPath string) error {
 	// Чтение всех файлов и подкаталогов в директории
-	files, err := ioutil.ReadDir(dirPath)
+	entries, err := os.ReadDir(dirPath)
 	if err != nil {
 		return err
 	}
 
 	// Удаление каждого файла и подкаталога
-	for _, file := range files {
-		filePath := dirPath + "/" + file.Name()
+	for _, entry := range entries {
+		filePath := filepath.Join(dirPath, entry.Name())
+
 		err := os.RemoveAll(filePath)
 		if err != nil {
 			return err
