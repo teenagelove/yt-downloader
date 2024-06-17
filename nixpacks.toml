@@ -1,5 +1,2 @@
-[phases.setup]
-aptPkgs = ["...", "ffmpeg"]
-
-#[start]
-#cmd = "apt-get update && apt-get install -y ffmpeg && ./out"
+[start]
+cmd = "apt-get update && apt-get install -y ffmpeg && ./out"
