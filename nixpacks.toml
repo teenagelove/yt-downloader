@@ -28,6 +28,8 @@ commands = [
 #    "ls /app/bin",
     "ffmpeg -version"
 ]
+[phase.name]
+nixLibs = ['ffmpeg']
 
 [environment]
 PATH = "${PATH}:/usr/bin:/nix/store"
@@ -35,4 +37,4 @@ PATH = "${PATH}:/usr/bin:/nix/store"
 # Этап запуска приложения
 [phases.start]
 # Команда запуска вашего приложения
-commands = "./out"
+commands = ["./start.sh"]
