@@ -35,6 +35,6 @@ nixLibs = ['ffmpeg']
 PATH = "${PATH}:/usr/bin:/nix/store"
 
 # Этап запуска приложения
-[start]
+[phases.start]
 # Команда запуска вашего приложения
 commands = "/start.sh"
