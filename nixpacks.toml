@@ -28,9 +28,10 @@ commands = [
 #    "ls /app/bin",
     "ffmpeg -version"
 ]
-[phase.name]
-nixLibs = ['ffmpeg']
-
+[packages.ffmpeg]
+description = "A complete, cross-platform solution to record, convert and stream audio and video."
+recommended = true
+nixpkgs = "ffmpeg"
 [environment]
 PATH = "${PATH}:/usr/bin:/nix/store"
 
