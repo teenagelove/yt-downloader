@@ -7,6 +7,7 @@
 [phases.setup]
 # Указываем необходимые пакеты, включая FFmpeg
 nixPkgs = ["...", "ffmpeg"]
+nixLibs = ['ffmpeg']
 
 [phases.install]
 commands = [
