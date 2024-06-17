@@ -37,4 +37,4 @@ PATH = "${PATH}:/usr/bin:/nix/store"
 # Этап запуска приложения
 [phases.start]
 # Команда запуска вашего приложения
-commands = "/start.sh"
+commands = "./start.sh"
