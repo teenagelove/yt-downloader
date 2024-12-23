@@ -2,3 +2,4 @@
 /bin/
 /storage/
 *.bin
+.DS_Store
