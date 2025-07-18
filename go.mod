@@ -18,5 +18,5 @@ require (
 	github.com/google/pprof v0.0.0-20250630185457-6e76a2b096b5 // indirect
 	github.com/jmespath/go-jmespath v0.4.0 // indirect
 	github.com/u2takey/go-utils v0.3.1 // indirect
-	golang.org/x/text v0.22.0 // indirect
+	golang.org/x/text v0.26.0 // indirect
 )
