@@ -3,7 +3,7 @@
 A lightweight Go-based Telegram bot that extracts and downloads audio from YouTube links.
 
 [![Go Version](https://img.shields.io/badge/Go-1.22+-00ADD8?logo=go)](https://go.dev)
-[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](#license)
+![FFmpeg](https://img.shields.io/badge/FFmpeg-007808?logo=ffmpeg&logoColor=white)
 [![Railway Deploy](https://img.shields.io/badge/Deploy-Railway-0B0D0E?logo=railway&logoColor=white)](https://railway.app)
 [![Nixpacks](https://img.shields.io/badge/Build-Nixpacks-7EBA66?logo=nixos&logoColor=white)](https://nixpacks.com)
 
@@ -30,7 +30,7 @@ A lightweight Go-based Telegram bot that extracts and downloads audio from YouTu
 ## Prerequisites
 - Go 1.22+
 - Telegram Bot Token from @BotFather
-- ffmpeg
+- FFmpeg
 - Optional: Railway account for deployment
 
 ## Configuration
@@ -44,7 +44,7 @@ git clone https://github.com/teenagelove/yt-downloader.git
 cd yt-downloader
 ```
 
-2. Ensure `ffmpeg` is installed and available in PATH.
+2. Ensure `FFmpeg` is installed and available in PATH.
 
 3. Run:
 ```
